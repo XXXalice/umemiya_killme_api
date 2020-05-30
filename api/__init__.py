@@ -4,10 +4,12 @@ __init__.pyは外部からimportされた時実行される
 '''
 
 from flask import Flask, make_response, jsonify
+from .controllers.icon import killme_path
 
 def create_app():
 
     app = Flask(__name__)
+    app.register_blueprint()
 
     return app
 
