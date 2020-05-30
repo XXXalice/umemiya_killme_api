@@ -21,3 +21,5 @@ def index_page():
             }
         ]
     })
+    resp = make_response(resp_body)
+    return resp
