@@ -8,7 +8,7 @@ API_ROOT_PATH = os.path.join(KILLME_ROOT_PATH, VERSION)
 # ルーティングを定義
 killme_path = Blueprint("killme_path", __name__)
 
-@killme_path.route(os.path.join(API_ROOT_PATH), methods=['GET'])
+@killme_path.route(API_ROOT_PATH, methods=['GET'])
 def index_page():
 
     resp_body = jsonify({
@@ -23,3 +23,7 @@ def index_page():
     })
     resp = make_response(resp_body)
     return resp
+
+@killme_path.route(API_ROOT_PATH + "/<int:get_id>")
+def get(get_id):
+    pass
