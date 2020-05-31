@@ -57,4 +57,14 @@ class Fetcher:
                      for row in table.find_all("tr")
                      for a in row.find_all("img")
                      for icon_url in a["src"]]
-        
+        result = None
+        import random
+        if num == 0:
+            result = random.choice(icon_urls)
+        else:
+            try:
+                result = icon_urls[num - 1]
+            except IndexError as e:
+                result = random.choice(icon_urls)
+                
+        return result
