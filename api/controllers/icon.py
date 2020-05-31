@@ -2,6 +2,7 @@ from flask import Blueprint
 from flask import request, make_response, jsonify
 import os
 from config import VERSION
+from ..models import scraper
 
 KILLME_ROOT_PATH = '/api/killme/'
 API_ROOT_PATH = os.path.join(KILLME_ROOT_PATH, VERSION)
@@ -10,7 +11,6 @@ killme_path = Blueprint("killme_path", __name__)
 
 @killme_path.route(API_ROOT_PATH, methods=['GET'])
 def index_page():
-
     resp_body = jsonify({
         "usage": [
             {
