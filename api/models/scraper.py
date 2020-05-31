@@ -46,4 +46,15 @@ class Crawler:
 スクレイピング機構
 """
 class Fetcher:
-    pass
+
+    def __init__(self, html):
+        self.html = html
+
+    def scrape_icon(self, num):
+        soup = BeautifulSoup(self.html, "html.parser")
+        icon_urls = [icon_url
+                     for table in soup.find_all("table", class_="td01")
+                     for row in table.find_all("tr")
+                     for a in row.find_all("img")
+                     for icon_url in a["src"]]
+        
