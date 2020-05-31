@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import traceback
+import os
 import sys
 from config import TARGET_URL, UA
 
@@ -66,5 +67,11 @@ class Fetcher:
                 result = icon_urls[num - 1]
             except IndexError as e:
                 result = random.choice(icon_urls)
-                
+
         return result
+
+    def fetch(self, icon_img_url):
+        os.makedirs("./icons", exist_ok=True)
+        content = requests.get(icon_img_url).content
+        with open(icon_img_url.split("/")[-1], "wb") as img:
+            img.write(content)
