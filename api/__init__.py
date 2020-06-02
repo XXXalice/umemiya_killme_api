@@ -9,7 +9,7 @@ from .controllers.icon import killme_path
 def create_app():
 
     app = Flask(__name__)
-    app.register_blueprint()
+    app.register_blueprint(killme_path)
 
     return app
 
