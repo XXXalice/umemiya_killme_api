@@ -53,11 +53,12 @@ class Fetcher:
 
     def scrape_icon(self, num):
         soup = BeautifulSoup(self.html, "html.parser")
-        icon_urls = [icon_url
+        icon_urls = [img
                      for table in soup.find_all("table", class_="td01")
                      for row in table.find_all("tr")
-                     for a in row.find_all("img")
-                     for icon_url in a["src"]]
+                     for img in row.find_all("img")
+                     ]
+
         import random
         if num == 0:
             result = random.choice(icon_urls)
@@ -67,10 +68,17 @@ class Fetcher:
             except IndexError as e:
                 result = random.choice(icon_urls)
 
-        return result
+        return result['src']
 
     def fetch(self, icon_img_url):
         os.makedirs("./icons", exist_ok=True)
         content = requests.get(icon_img_url).content
         with open(icon_img_url.split("/")[-1], "wb") as img:
             img.write(content)
+
+
+if __name__ == '__main__':
+    c = Crawler()
+    f = Fetcher(c.get_html())
+    icons = f.scrape_icon(10)
+    print(icons)
