@@ -26,7 +26,7 @@ def index_page():
 
 @killme_path.route(API_ROOT_PATH + "/<int:get_id>")
 def get(get_id):
-    crawler = scraper.Crawler
+    crawler = scraper.Crawler()
     fetcher = scraper.Fetcher(html=crawler.get_html())
     icon_url = fetcher.scrape_icon(num=get_id)
     resp_body = jsonify({
